@@ -1,25 +1,18 @@
-import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import { createSignal, type Component } from "solid-js";
+import PlayerCount from "./PlayerCount";
 
 const App: Component = () => {
+  const [playerCount, setPlayerCount] = createSignal(2);
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
+    <div>
+      <header>
+        <h1 class="text-xl font-bold text-center">
+          Cafe International Score Keeping
+        </h1>
       </header>
+
+      <PlayerCount count={playerCount} setCount={setPlayerCount} />
     </div>
   );
 };
