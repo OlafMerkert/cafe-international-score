@@ -1,7 +1,11 @@
 import { sum } from "lodash-es";
-import { createSignal, type Component, For } from "solid-js";
+import { createSignal, type Component, For, Show } from "solid-js";
 
-const ScoreColumn: Component = () => {
+interface ShowScoreProps {
+  showScore: () => boolean;
+}
+
+const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
   const [nextScore, setNextScore] = createSignal("");
   const [isInputValid, setIsInputValid] = createSignal(true);
   const [allScores, setAllScores] = createSignal<number[]>([]);
@@ -46,7 +50,9 @@ const ScoreColumn: Component = () => {
         Record
       </button>
 
-      <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
+      <Show when={showScore()}>
+        <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
+      </Show>
 
       <For each={allScores()}>{(score) => <div>{score}</div>}</For>
 
