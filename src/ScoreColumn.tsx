@@ -3,11 +3,17 @@ import { createSignal, type Component, For } from "solid-js";
 
 const ScoreColumn: Component = () => {
   const [nextScore, setNextScore] = createSignal("");
-  const [allScores, setAllScores] = createSignal([]);
+  const [isInputValid, setIsInputValid] = createSignal(true);
+  const [allScores, setAllScores] = createSignal<number[]>([]);
 
   const handleAddScore = () => {
-    setAllScores([...allScores(), parseInt(nextScore(), 10)]);
-    setNextScore("");
+    const parsedScore = parseInt(nextScore(), 10);
+    if (!isNaN(parsedScore)) {
+      setAllScores([...allScores(), parsedScore]);
+      setNextScore("");
+    } else {
+      setIsInputValid(false);
+    }
   };
 
   const handleRemoveLast = () => {
@@ -18,13 +24,19 @@ const ScoreColumn: Component = () => {
 
   const totalScore = () => sum(allScores());
 
+  const handleScoreInput = (event: any) => {
+    setNextScore(event.currentTarget.value);
+    setIsInputValid(true);
+  };
+
   return (
     <div class="space-x-1 mt-2">
       <input
         class="border border-black p-1 text-right w-32"
+        classList={{ "bg-red-200": !isInputValid() }}
         type="text"
         value={nextScore()}
-        onChange={(event) => setNextScore(event.currentTarget.value)}
+        onChange={handleScoreInput}
       />
       <button
         class="border border-black bg-gray-200 rounded-md px-2 py-1"
