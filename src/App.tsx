@@ -3,6 +3,7 @@ import { createSignal, type Component, For } from "solid-js";
 import PlayerCount from "./PlayerCount";
 import PlayerName from "./PlayerName";
 import ScoreColumn from "./ScoreColumn";
+import ShowScoreSetting from "./ShowScoreSetting";
 
 const App: Component = () => {
   const [playerCount, setPlayerCount] = createSignal(2);
@@ -20,14 +21,7 @@ const App: Component = () => {
 
       <PlayerCount count={playerCount} setCount={setPlayerCount} />
 
-      <div>
-        <label>Show Score?</label>
-        <input
-          type="checkbox"
-          value={showScore() ? "checked" : undefined}
-          onChange={(event) => setShowScore(!!event.currentTarget.checked)}
-        />
-      </div>
+      <ShowScoreSetting showScore={showScore} setShowScore={setShowScore} />
 
       <div class="flex flex-row">
         <For each={players()}>
