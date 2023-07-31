@@ -7,14 +7,21 @@ interface PlayerCountProps {
 
 const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
   return (
-    <div class="space-x-10 m-2">
-      <span class="font-bold">Player Count</span>
+    <div class="m-2">
+      <label class="font-bold mr-10">Player Count</label>
       <input
-        class="border border-black text-right w-16"
+        class="border border-black text-right w-16 px-2 py-1"
         type="number"
         value={count()}
         onChange={(event) => setCount(parseInt(event.currentTarget.value, 10))}
       />
+      <button
+        class="border border-black px-2 py-1 bg-gray-200 rounded-md ml-2"
+        type="button"
+        onClick={() => setCount((c: number) => c + 1)}
+      >
+        +
+      </button>
     </div>
   );
 };
