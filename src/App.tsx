@@ -2,6 +2,7 @@ import { range } from "lodash-es";
 import { createSignal, type Component, For } from "solid-js";
 import PlayerCount from "./PlayerCount";
 import PlayerName from "./PlayerName";
+import ScoreColumn from "./ScoreColumn";
 
 const App: Component = () => {
   const [playerCount, setPlayerCount] = createSignal(2);
@@ -22,6 +23,8 @@ const App: Component = () => {
           {(_player) => (
             <div class="m-1 border border-blue-800 p-2">
               <PlayerName />
+
+              <ScoreColumn />
             </div>
           )}
         </For>
