@@ -33,21 +33,28 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
     setIsInputValid(true);
   };
 
+  const handleScoreInputEnter = (event: any) => {
+    if (event.key === "Enter") {
+      handleAddScore();
+    }
+  };
+
   return (
     <div class="space-x-1 mt-2">
       <input
-        class="border border-black p-1 text-right w-32"
+        class="border border-black p-1 text-right w-20"
         classList={{ "bg-red-200": !isInputValid() }}
         type="text"
         value={nextScore()}
         onChange={handleScoreInput}
+        onKeyUp={handleScoreInputEnter}
       />
       <button
         class="border border-black bg-gray-200 rounded-md px-2 py-1"
         type="button"
         onClick={handleAddScore}
       >
-        Record
+        add
       </button>
 
       <Show when={showScore()}>
@@ -62,7 +69,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
           type="button"
           onClick={handleRemoveLast}
         >
-          Remove Last
+          remove last
         </button>
       </div>
     </div>
