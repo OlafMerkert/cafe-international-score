@@ -4,8 +4,9 @@ const PlayerName: Component = () => {
   const [playerName, setPlayerName] = createSignal("Player ?");
 
   return (
-    <div class="border border-black">
+    <div class="">
       <input
+        class="px-2 py-1 border border-black"
         type="text"
         value={playerName()}
         onChange={(e) => setPlayerName(e.currentTarget.value)}

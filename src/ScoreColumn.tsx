@@ -34,17 +34,19 @@ const ScoreColumn: Component = () => {
         Record
       </button>
 
-      <div class="text-large font-bold">Total Score: {totalScore()}</div>
+      <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
 
       <For each={allScores()}>{(score) => <div>{score}</div>}</For>
 
-      <button
-        class="border border-black bg-gray-200 rounded-md px-2 py-1"
-        type="button"
-        onClick={handleRemoveLast}
-      >
-        Remove Last
-      </button>
+      <div class="mt-3">
+        <button
+          class="border border-black bg-gray-200 rounded-md px-2 py-1"
+          type="button"
+          onClick={handleRemoveLast}
+        >
+          Remove Last
+        </button>
+      </div>
     </div>
   );
 };
