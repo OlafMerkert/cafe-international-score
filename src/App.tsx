@@ -14,9 +14,7 @@ const App: Component = () => {
   return (
     <div>
       <header>
-        <h1 class="text-xl font-bold text-center">
-          Cafe International Score Keeping
-        </h1>
+        <h1 class="text-xl font-bold px-8">Cafe International Score Keeping</h1>
       </header>
 
       <PlayerCount count={playerCount} setCount={setPlayerCount} />
