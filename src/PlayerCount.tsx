@@ -8,8 +8,11 @@ interface PlayerCountProps {
 const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
   return (
     <div class="m-2">
-      <label class="font-bold mr-10">Player Count</label>
+      <label class="font-bold mr-10" for="player-count-input">
+        Player Count
+      </label>
       <input
+        id="player-count-input"
         class="border border-black text-right w-16 px-2 py-1"
         type="number"
         value={count()}
