@@ -6,6 +6,11 @@ interface PlayerCountProps {
 }
 
 const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
+  const handleChangeCount = (event: Event) => {
+    const target = event.currentTarget as HTMLInputElement;
+    const newCount = Math.abs(parseInt(target.value, 10));
+    setCount(newCount);
+  };
   return (
     <div class="m-2">
       <label class="font-bold mr-10" for="player-count-input">
@@ -16,7 +21,7 @@ const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
         class="border border-black text-right w-16 px-2 py-1"
         type="number"
         value={count()}
-        onChange={(event) => setCount(parseInt(event.currentTarget.value, 10))}
+        onChange={handleChangeCount}
       />
       <button
         class="border border-black px-2 py-1 bg-gray-200 rounded-md ml-2"

@@ -1,5 +1,5 @@
 import { range } from "lodash-es";
-import { createSignal, type Component, For } from "solid-js";
+import { For, createSignal, type Component } from "solid-js";
 import PlayerCount from "./PlayerCount";
 import PlayerName from "./PlayerName";
 import ScoreColumn from "./ScoreColumn";
@@ -23,13 +23,18 @@ const App: Component = () => {
 
       <div class="flex flex-row">
         <For each={players()}>
-          {(_player) => (
-            <div class="m-1 border border-blue-800 p-2">
-              <PlayerName />
+          {(_player) => {
+            return (
+              <div
+                class="m-1 border border-blue-800 p-2"
+                data-testid="player-column"
+              >
+                <PlayerName />
 
-              <ScoreColumn showScore={showScore} />
-            </div>
-          )}
+                <ScoreColumn showScore={showScore} />
+              </div>
+            );
+          }}
         </For>
       </div>
     </div>
