@@ -1,5 +1,5 @@
 import { sum } from "lodash-es";
-import { createSignal, type Component, For, Show } from "solid-js";
+import { For, Show, createSignal, type Component } from "solid-js";
 
 interface ShowScoreProps {
   showScore: () => boolean;
@@ -12,6 +12,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
 
   const handleAddScore = () => {
     const parsedScore = parseInt(nextScore(), 10);
+
     if (!isNaN(parsedScore)) {
       setAllScores([...allScores(), parsedScore]);
       setNextScore("");
@@ -49,7 +50,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
         type="text"
         value={nextScore()}
         onChange={handleScoreInput}
-        onKeyUp={handleScoreInputEnter}
+        onKeyDown={handleScoreInputEnter}
       />
       <button
         class="border border-black bg-gray-200 rounded-md px-2 py-1"
