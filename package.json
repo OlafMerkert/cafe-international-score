@@ -13,6 +13,7 @@
   "devDependencies": {
     "@solidjs/testing-library": "^0.8.4",
     "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/lodash-es": "^4.17.8",
     "autoprefixer": "^10.4.14",
     "jsdom": "^22.1.0",
