@@ -43,7 +43,21 @@ const renderApp = () => {
       .map((score) => Number(score.textContent));
   };
 
-  return { enterScore, enterScoreKeyboard, getScoresForPlayer };
+  const getTotalScore = (expectedScore: string = "") =>
+    app.queryAllByText(new RegExp(`total score:.*${expectedScore}`, "i"));
+
+  const showTotalScore = async () => {
+    const totalScoreToggle = app.getByLabelText("Show Score?");
+    await user.click(totalScoreToggle);
+  };
+
+  return {
+    enterScore,
+    enterScoreKeyboard,
+    getScoresForPlayer,
+    getTotalScore,
+    showTotalScore,
+  };
 };
 
 describe("recording points during the game for multiple players", () => {
@@ -67,6 +81,16 @@ describe("recording points during the game for multiple players", () => {
     expect(getScoresForPlayer(1)).toEqual([]);
   });
 
+  test("recording negative scores for the first player", async () => {
+    const { enterScore, getScoresForPlayer } = renderApp();
+
+    await enterScore(0, "-8");
+    await enterScore(0, "-4");
+
+    expect(getScoresForPlayer(0)).toEqual([-8, -4]);
+    expect(getScoresForPlayer(1)).toEqual([]);
+  });
+
   test("recording multiple scores for the second player", async () => {
     const { enterScore, getScoresForPlayer } = renderApp();
 
@@ -86,5 +110,28 @@ describe("recording points during the game for multiple players", () => {
 
     expect(getScoresForPlayer(0)).toEqual([8, 2]);
     expect(getScoresForPlayer(1)).toEqual([3]);
+  });
+
+  test("the total score is hidden by default", () => {
+    const { getTotalScore } = renderApp();
+    expect(getTotalScore()).toHaveLength(0);
+  });
+
+  test("the total score can be shown", async () => {
+    const { showTotalScore, getTotalScore } = renderApp();
+    await showTotalScore();
+    expect(getTotalScore("0")).toHaveLength(2);
+  });
+
+  test("the total score is computed as sum", async () => {
+    const { enterScore, showTotalScore, getTotalScore } = renderApp();
+    await showTotalScore();
+    await enterScore(0, "8");
+    await enterScore(0, "2");
+    await enterScore(1, "3");
+    await enterScore(1, "-5");
+
+    expect(getTotalScore("10")).toHaveLength(1);
+    expect(getTotalScore("-2")).toHaveLength(1);
   });
 });
