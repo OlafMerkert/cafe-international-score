@@ -35,6 +35,15 @@ const renderApp = () => {
     fireEvent.keyDown(scoreInput, { key: "Enter", charCode: 13 });
   };
 
+  const removeLastScore = async (playerIndex: number) => {
+    const playerColumn = within(getPlayerColumns()[playerIndex]);
+    const removeButton = playerColumn.getByRole("button", {
+      name: "remove last",
+    });
+
+    await userEvent.click(removeButton);
+  };
+
   const getScoresForPlayer = (playerIndex: number) => {
     const playerColumn = getPlayerColumnForPlayer(playerIndex);
 
@@ -54,6 +63,7 @@ const renderApp = () => {
   return {
     enterScore,
     enterScoreKeyboard,
+    removeLastScore,
     getScoresForPlayer,
     getTotalScore,
     showTotalScore,
@@ -109,6 +119,27 @@ describe("recording points during the game for multiple players", () => {
     await enterScore(0, "2");
 
     expect(getScoresForPlayer(0)).toEqual([8, 2]);
+    expect(getScoresForPlayer(1)).toEqual([3]);
+  });
+
+  test("removing the last score", async () => {
+    const { enterScore, removeLastScore, getScoresForPlayer } = renderApp();
+
+    await enterScore(0, "8");
+    await enterScore(0, "2");
+    await enterScore(0, "7");
+
+    await enterScore(1, "3");
+    await enterScore(1, "5");
+
+    expect(getScoresForPlayer(0)).toEqual([8, 2, 7]);
+    expect(getScoresForPlayer(1)).toEqual([3, 5]);
+
+    await removeLastScore(0);
+    await removeLastScore(1);
+    await removeLastScore(0);
+
+    expect(getScoresForPlayer(0)).toEqual([8]);
     expect(getScoresForPlayer(1)).toEqual([3]);
   });
 
