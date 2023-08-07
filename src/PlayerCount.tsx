@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import Button from "./design/Button";
 
 interface PlayerCountProps {
   count: () => number;
@@ -12,8 +13,8 @@ const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
     setCount(newCount);
   };
   return (
-    <div class="m-2">
-      <label class="font-bold mr-10" for="player-count-input">
+    <div class="m-2 space-x-2">
+      <label class="font-bold mr-7" for="player-count-input">
         Player Count
       </label>
       <input
@@ -23,13 +24,7 @@ const PlayerCount: Component<PlayerCountProps> = ({ count, setCount }) => {
         value={count()}
         onChange={handleChangeCount}
       />
-      <button
-        class="border border-black px-2 py-1 bg-gray-200 rounded-md ml-2"
-        type="button"
-        onClick={() => setCount((c: number) => c + 1)}
-      >
-        +
-      </button>
+      <Button onClick={() => setCount((c: number) => c + 1)}>+</Button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { sum } from "lodash-es";
 import { For, Show, createSignal, type Component } from "solid-js";
+import Button from "./design/Button";
 
 interface ShowScoreProps {
   showScore: () => boolean;
@@ -52,13 +53,8 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
         onChange={handleScoreInput}
         onKeyDown={handleScoreInputEnter}
       />
-      <button
-        class="border border-black bg-gray-200 rounded-md px-2 py-1"
-        type="button"
-        onClick={handleAddScore}
-      >
-        add
-      </button>
+
+      <Button onClick={handleAddScore}>add</Button>
 
       <Show when={showScore()}>
         <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
@@ -69,13 +65,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
       </For>
 
       <div class="mt-3">
-        <button
-          class="border border-black bg-gray-200 rounded-md px-2 py-1"
-          type="button"
-          onClick={handleRemoveLast}
-        >
-          remove last
-        </button>
+        <Button onClick={handleRemoveLast}>remove last</Button>
       </div>
     </div>
   );
