@@ -1,13 +1,11 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
 import solidPlugin from "vite-plugin-solid";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [solidPlugin()],
   test: {
-    deps: {
-      registerNodeLoader: true,
-      inline: [/solid-js/],
-    },
     environment: "jsdom",
     globals: true,
     setupFiles: [
