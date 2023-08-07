@@ -42,6 +42,8 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
   return (
     <div class="space-x-1 mt-2">
       <input
+        data-testid="score-input"
+        name="score"
         class="border border-black p-1 text-right w-20"
         classList={{ "bg-red-200": !isInputValid() }}
         type="text"
@@ -61,7 +63,9 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
         <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
       </Show>
 
-      <For each={allScores()}>{(score) => <div>{score}</div>}</For>
+      <For each={allScores()}>
+        {(score) => <div data-testid="score-item">{score}</div>}
+      </For>
 
       <div class="mt-3">
         <button

@@ -6,6 +6,7 @@ const PlayerName: Component = () => {
   return (
     <div class="">
       <input
+        name="player-name"
         data-testid="player-name"
         class="px-2 py-1 border border-black w-32"
         type="text"
