@@ -15,7 +15,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
     const parsedScore = parseInt(nextScore(), 10);
 
     if (!isNaN(parsedScore)) {
-      setAllScores([...allScores(), parsedScore]);
+      setAllScores([parsedScore, ...allScores()]);
       setNextScore("");
     } else {
       setIsInputValid(false);
@@ -23,8 +23,8 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
   };
 
   const handleRemoveLast = () => {
-    const newScores = [...allScores()];
-    newScores.pop();
+    let newScores = [...allScores()];
+    newScores = newScores.slice(1);
     setAllScores(newScores);
   };
 
@@ -60,13 +60,13 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
         <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
       </Show>
 
-      <For each={allScores()}>
-        {(score) => <div data-testid="score-item">{score}</div>}
-      </For>
-
       <div class="mt-3">
         <Button onClick={handleRemoveLast}>remove last</Button>
       </div>
+
+      <For each={allScores()}>
+        {(score) => <div data-testid="score-item">{score}</div>}
+      </For>
     </div>
   );
 };
