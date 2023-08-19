@@ -1,14 +1,13 @@
 import { sum } from "lodash-es";
 import { For, Show, createSignal, type Component } from "solid-js";
 import Button from "./design/Button";
+import { getScoreInputId } from "./inputIds";
 
 interface ShowScoreProps {
   playerCount: () => number;
   playerIndex: number;
   showScore: () => boolean;
 }
-
-const getScoreInputId = (playerIndex: number) => `score-input-${playerIndex}`;
 
 const ScoreColumn: Component<ShowScoreProps> = (props) => {
   const [nextScore, setNextScore] = createSignal("");

@@ -1,11 +1,9 @@
 import { createSignal, type Component } from "solid-js";
+import { getPlayerNameInputId, getScoreInputId } from "./inputIds";
 
 interface PlayerNameProps {
   playerIndex: number;
 }
-
-const getPlayerNameInputId = (playerIndex: number) =>
-  `player-name-${playerIndex}`;
 
 const PlayerName: Component<PlayerNameProps> = (props) => {
   const [playerName, setPlayerName] = createSignal(
@@ -15,12 +13,17 @@ const PlayerName: Component<PlayerNameProps> = (props) => {
 
   const handlePlayerNameInputTab = (event: KeyboardEvent) => {
     if (event.key === "Tab") {
+      event.preventDefault();
       const nextInput = document.getElementById(
         getPlayerNameInputId(props.playerIndex + 1),
       );
       if (nextInput) {
-        event.preventDefault();
         nextInput.focus();
+      } else {
+        const firstInput = document.getElementById(getScoreInputId(0));
+        if (firstInput) {
+          firstInput.focus();
+        }
       }
     }
   };
