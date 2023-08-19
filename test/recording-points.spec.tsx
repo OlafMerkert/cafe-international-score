@@ -32,7 +32,9 @@ const renderApp = () => {
     await user.clear(scoreInput);
     await user.type(scoreInput, score);
     await user.tab();
-    fireEvent.keyDown(scoreInput, { key: "Enter", charCode: 13 });
+    const enterKey = { key: "Enter", charCode: 13 };
+    fireEvent.keyUp(scoreInput, enterKey);
+    fireEvent.keyDown(scoreInput, enterKey);
   };
 
   const removeLastScore = async (playerIndex: number) => {

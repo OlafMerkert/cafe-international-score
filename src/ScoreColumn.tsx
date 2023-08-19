@@ -55,7 +55,7 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
         type="text"
         value={nextScore()}
         onChange={handleScoreInput}
-        onKeyDown={handleScoreInputEnter}
+        onKeyUp={handleScoreInputEnter}
       />
 
       <Button onClick={handleAddScore}>add</Button>
