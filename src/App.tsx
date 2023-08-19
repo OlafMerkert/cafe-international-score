@@ -6,8 +6,14 @@ import ShowScoreSetting from "./ShowScoreSetting";
 import { createPlayerStore } from "./playerStore";
 
 const App: Component = () => {
-  const { store, playerCount, setPlayerCount, setPlayerName } =
-    createPlayerStore(2);
+  const {
+    store,
+    playerCount,
+    setPlayerCount,
+    setPlayerName,
+    addScore,
+    removeLastScore,
+  } = createPlayerStore(2);
 
   const [showScore, setShowScore] = createSignal(false);
 
@@ -39,6 +45,9 @@ const App: Component = () => {
                   showScore={showScore}
                   playerIndex={playerIndex()}
                   playerCount={playerCount}
+                  allScores={() => player.playerScore}
+                  addScore={(score) => addScore(playerIndex(), score)}
+                  removeLastScore={() => removeLastScore(playerIndex())}
                 />
               </div>
             );

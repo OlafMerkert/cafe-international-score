@@ -50,5 +50,25 @@ export function createPlayerStore(initialPlayerCount: number) {
     setStore("players", playerIndex, (player) => ({ ...player, playerName }));
   }
 
-  return { store, playerCount, setPlayerCount, setPlayerName };
+  function addScore(playerIndex: number, score: number) {
+    setStore("players", playerIndex, "playerScore", (scores) => [
+      score,
+      ...scores,
+    ]);
+  }
+
+  function removeLastScore(playerIndex: number) {
+    setStore("players", playerIndex, "playerScore", (scores) =>
+      scores.slice(1),
+    );
+  }
+
+  return {
+    store,
+    playerCount,
+    setPlayerCount,
+    setPlayerName,
+    addScore,
+    removeLastScore,
+  };
 }

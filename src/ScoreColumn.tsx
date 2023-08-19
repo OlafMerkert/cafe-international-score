@@ -7,30 +7,27 @@ interface ShowScoreProps {
   playerCount: () => number;
   playerIndex: number;
   showScore: () => boolean;
+  allScores: () => number[];
+  addScore: (score: number) => void;
+  removeLastScore: () => void;
 }
 
 const ScoreColumn: Component<ShowScoreProps> = (props) => {
   const [nextScore, setNextScore] = createSignal("");
   const [isInputValid, setIsInputValid] = createSignal(true);
-  const [allScores, setAllScores] = createSignal<number[]>([]);
 
   const handleAddScore = () => {
     const parsedScore = parseInt(nextScore(), 10);
 
     if (!isNaN(parsedScore)) {
-      setAllScores([parsedScore, ...allScores()]);
+      props.addScore(parsedScore);
       setNextScore("");
     } else {
       setIsInputValid(false);
     }
   };
 
-  const handleRemoveLast = () => {
-    const [, ...newScores] = allScores();
-    setAllScores(newScores);
-  };
-
-  const totalScore = () => sum(allScores());
+  const totalScore = () => sum(props.allScores());
 
   const handleScoreInput = (
     event: Event & {
@@ -82,10 +79,10 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
       </Show>
 
       <div class="mt-3">
-        <Button onClick={handleRemoveLast}>remove last</Button>
+        <Button onClick={() => props.removeLastScore()}>remove last</Button>
       </div>
 
-      <For each={allScores()}>
+      <For each={props.allScores()}>
         {(score) => <div data-testid="score-item">{score}</div>}
       </For>
     </div>
