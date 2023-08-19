@@ -23,7 +23,7 @@ const App: Component = () => {
 
       <div class="flex flex-row">
         <For each={players()}>
-          {(_player) => {
+          {() => {
             return (
               <div
                 class="m-1 border border-blue-800 p-2"

@@ -10,7 +10,7 @@ const Button: Component<ParentProps<ButtonProps>> = (props) => {
     <button
       class="border border-black bg-gray-200 hover:bg-blue-300 rounded-md px-2 py-1"
       type="button"
-      onClick={props.onClick}
+      onClick={() => props.onClick()}
     >
       {c()}
     </button>

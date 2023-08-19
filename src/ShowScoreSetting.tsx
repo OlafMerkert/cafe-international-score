@@ -5,10 +5,7 @@ interface ShowScoreSettingProps {
   setShowScore: (showScore: boolean) => void;
 }
 
-const ShowScoreSetting: Component<ShowScoreSettingProps> = ({
-  showScore,
-  setShowScore,
-}) => {
+const ShowScoreSetting: Component<ShowScoreSettingProps> = (props) => {
   return (
     <div class="m-2">
       <label class="font-bold mr-10" for="show-score-checkbox">
@@ -17,8 +14,8 @@ const ShowScoreSetting: Component<ShowScoreSettingProps> = ({
       <input
         id="show-score-checkbox"
         type="checkbox"
-        value={showScore() ? "checked" : undefined}
-        onChange={(event) => setShowScore(!!event.currentTarget.checked)}
+        value={props.showScore() ? "checked" : undefined}
+        onChange={(event) => props.setShowScore(!!event.currentTarget.checked)}
       />
     </div>
   );

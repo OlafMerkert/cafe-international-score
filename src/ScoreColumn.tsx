@@ -6,7 +6,7 @@ interface ShowScoreProps {
   showScore: () => boolean;
 }
 
-const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
+const ScoreColumn: Component<ShowScoreProps> = (props) => {
   const [nextScore, setNextScore] = createSignal("");
   const [isInputValid, setIsInputValid] = createSignal(true);
   const [allScores, setAllScores] = createSignal<number[]>([]);
@@ -23,18 +23,23 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
   };
 
   const handleRemoveLast = () => {
-    const [_lastScore, ...newScores] = allScores();
+    const [, ...newScores] = allScores();
     setAllScores(newScores);
   };
 
   const totalScore = () => sum(allScores());
 
-  const handleScoreInput = (event: any) => {
+  const handleScoreInput = (
+    event: Event & {
+      target: HTMLInputElement;
+      currentTarget: HTMLInputElement;
+    },
+  ) => {
     setNextScore(event.currentTarget.value);
     setIsInputValid(true);
   };
 
-  const handleScoreInputEnter = (event: any) => {
+  const handleScoreInputEnter = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
       handleAddScore();
     }
@@ -55,7 +60,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
 
       <Button onClick={handleAddScore}>add</Button>
 
-      <Show when={showScore()}>
+      <Show when={props.showScore()}>
         <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
       </Show>
 
