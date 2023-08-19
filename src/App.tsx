@@ -1,10 +1,14 @@
-import { For, createSignal, type Component } from "solid-js";
+import { For, createSignal, type Component, createEffect } from "solid-js";
 import PlayerCount from "./PlayerCount";
 import PlayerName from "./PlayerName";
 import ScoreColumn from "./ScoreColumn";
 import ShowScoreSetting from "./ShowScoreSetting";
 import { createPlayerStore } from "./playerStore";
 import ResetGame from "./ResetGame";
+import {
+  loadApplicationState,
+  saveApplicationState,
+} from "./persistentStorage";
 
 const App: Component = () => {
   const {
@@ -15,7 +19,11 @@ const App: Component = () => {
     addScore,
     removeLastScore,
     resetScores,
-  } = createPlayerStore(2);
+  } = createPlayerStore(2, loadApplicationState());
+
+  createEffect(() => {
+    saveApplicationState(store);
+  });
 
   const [showScore, setShowScore] = createSignal(false);
 

@@ -6,7 +6,7 @@ interface PlayerState {
   playerScore: number[];
 }
 
-interface StoreState {
+export interface StoreState {
   players: PlayerState[];
 }
 
@@ -17,8 +17,12 @@ function playerTemplate(playerIndex: number): PlayerState {
   };
 }
 
-export function createPlayerStore(initialPlayerCount: number) {
-  const initialState: StoreState = {
+export function createPlayerStore(
+  initialPlayerCount: number,
+  savedState?: unknown,
+) {
+  // TODO validate and sanitize savedState
+  const initialState: StoreState = (savedState as StoreState) ?? {
     players: range(initialPlayerCount).map(playerTemplate),
   };
   const [store, setStore] = createStore(initialState);
