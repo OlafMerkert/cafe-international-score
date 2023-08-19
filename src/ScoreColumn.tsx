@@ -54,8 +54,10 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
       event.preventDefault();
       const nextInput = document.getElementById(
         getScoreInputId((props.playerIndex + 1) % props.playerCount()),
-      ) as HTMLInputElement;
-      nextInput.focus();
+      );
+      if (nextInput) {
+        nextInput.focus();
+      }
     }
   };
 
