@@ -12,7 +12,7 @@ interface StoreState {
 
 function playerTemplate(playerIndex: number): PlayerState {
   return {
-    playerName: `Player ${playerIndex}`,
+    playerName: `Player ${playerIndex + 1}`,
     playerScore: [],
   };
 }
@@ -24,7 +24,6 @@ export function createPlayerStore(initialPlayerCount: number) {
   const [store, setStore] = createStore(initialState);
 
   function setPlayerCount(playerCount: number | ((prev: number) => number)) {
-    console.log("setPlayerCount", playerCount);
     setStore("players", (players) => {
       const newPlayerCount =
         typeof playerCount === "function"
@@ -37,7 +36,9 @@ export function createPlayerStore(initialPlayerCount: number) {
         const additionalPlayerCount = newPlayerCount - players.length;
         return [
           ...players,
-          ...range(additionalPlayerCount).map(playerTemplate),
+          ...range(additionalPlayerCount)
+            .map((index) => players.length + index)
+            .map(playerTemplate),
         ];
       }
     });
