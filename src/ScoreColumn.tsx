@@ -3,8 +3,12 @@ import { For, Show, createSignal, type Component } from "solid-js";
 import Button from "./design/Button";
 
 interface ShowScoreProps {
+  playerCount: () => number;
+  playerIndex: number;
   showScore: () => boolean;
 }
+
+const getScoreInputId = (playerIndex: number) => `score-input-${playerIndex}`;
 
 const ScoreColumn: Component<ShowScoreProps> = (props) => {
   const [nextScore, setNextScore] = createSignal("");
@@ -45,9 +49,20 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
     }
   };
 
+  const handleScoreInputTab = (event: KeyboardEvent) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const nextInput = document.getElementById(
+        getScoreInputId((props.playerIndex + 1) % props.playerCount()),
+      ) as HTMLInputElement;
+      nextInput.focus();
+    }
+  };
+
   return (
     <div class="space-x-1 mt-2">
       <input
+        id={getScoreInputId(props.playerIndex)}
         data-testid="score-input"
         name="score"
         class="border border-black p-1 text-right w-20"
@@ -56,6 +71,7 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
         value={nextScore()}
         onChange={handleScoreInput}
         onKeyUp={handleScoreInputEnter}
+        onKeyDown={handleScoreInputTab}
       />
 
       <Button onClick={handleAddScore}>add</Button>
