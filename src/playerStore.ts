@@ -46,5 +46,9 @@ export function createPlayerStore(initialPlayerCount: number) {
 
   const playerCount = () => store.players.length;
 
-  return { store, playerCount, setPlayerCount };
+  function setPlayerName(playerIndex: number, playerName: string) {
+    setStore("players", playerIndex, (player) => ({ ...player, playerName }));
+  }
+
+  return { store, playerCount, setPlayerCount, setPlayerName };
 }

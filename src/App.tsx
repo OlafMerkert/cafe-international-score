@@ -6,7 +6,8 @@ import ShowScoreSetting from "./ShowScoreSetting";
 import { createPlayerStore } from "./playerStore";
 
 const App: Component = () => {
-  const { store, playerCount, setPlayerCount } = createPlayerStore(2);
+  const { store, playerCount, setPlayerCount, setPlayerName } =
+    createPlayerStore(2);
 
   const [showScore, setShowScore] = createSignal(false);
 
@@ -28,7 +29,11 @@ const App: Component = () => {
                 class="m-1 border border-blue-800 p-2"
                 data-testid="player-column"
               >
-                <PlayerName playerIndex={playerIndex()} />
+                <PlayerName
+                  playerIndex={playerIndex()}
+                  playerName={() => player.playerName}
+                  setPlayerName={(name) => setPlayerName(playerIndex(), name)}
+                />
 
                 <ScoreColumn
                   showScore={showScore}

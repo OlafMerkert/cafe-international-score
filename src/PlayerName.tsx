@@ -3,14 +3,11 @@ import { getPlayerNameInputId, getScoreInputId } from "./inputIds";
 
 interface PlayerNameProps {
   playerIndex: number;
+  playerName: () => string;
+  setPlayerName: (playerName: string) => void;
 }
 
 const PlayerName: Component<PlayerNameProps> = (props) => {
-  const [playerName, setPlayerName] = createSignal(
-    /* eslint-disable-next-line solid/reactivity */
-    `Player ${props.playerIndex + 1}`,
-  );
-
   const handlePlayerNameInputTab = (event: KeyboardEvent) => {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -36,8 +33,8 @@ const PlayerName: Component<PlayerNameProps> = (props) => {
         data-testid="player-name"
         class="px-2 py-1 border border-black w-32"
         type="text"
-        value={playerName()}
-        onChange={(event) => setPlayerName(event.currentTarget.value)}
+        value={props.playerName()}
+        onChange={(event) => props.setPlayerName(event.currentTarget.value)}
         onKeyDown={handlePlayerNameInputTab}
       />
     </div>
