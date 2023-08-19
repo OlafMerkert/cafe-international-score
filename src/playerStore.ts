@@ -63,6 +63,12 @@ export function createPlayerStore(initialPlayerCount: number) {
     );
   }
 
+  function resetScores() {
+    setStore("players", (players) =>
+      players.map((player) => ({ ...player, playerScore: [] })),
+    );
+  }
+
   return {
     store,
     playerCount,
@@ -70,5 +76,6 @@ export function createPlayerStore(initialPlayerCount: number) {
     setPlayerName,
     addScore,
     removeLastScore,
+    resetScores,
   };
 }

@@ -4,6 +4,7 @@ import PlayerName from "./PlayerName";
 import ScoreColumn from "./ScoreColumn";
 import ShowScoreSetting from "./ShowScoreSetting";
 import { createPlayerStore } from "./playerStore";
+import ResetGame from "./ResetGame";
 
 const App: Component = () => {
   const {
@@ -13,6 +14,7 @@ const App: Component = () => {
     setPlayerName,
     addScore,
     removeLastScore,
+    resetScores,
   } = createPlayerStore(2);
 
   const [showScore, setShowScore] = createSignal(false);
@@ -54,6 +56,8 @@ const App: Component = () => {
           }}
         </For>
       </div>
+
+      <ResetGame resetScores={resetScores} />
     </div>
   );
 };
