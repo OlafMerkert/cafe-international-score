@@ -23,8 +23,7 @@ const ScoreColumn: Component<ShowScoreProps> = ({ showScore }) => {
   };
 
   const handleRemoveLast = () => {
-    let newScores = [...allScores()];
-    newScores = newScores.slice(1);
+    const [_lastScore, ...newScores] = allScores();
     setAllScores(newScores);
   };
 

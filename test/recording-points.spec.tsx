@@ -97,7 +97,7 @@ describe("recording points during the game for multiple players", () => {
     await enterScore(0, "-8");
     await enterScore(0, "-4");
 
-    expect(getScoresForPlayer(0)).toEqual([-8, -4]);
+    expect(getScoresForPlayer(0)).toEqual([-4, -8]);
     expect(getScoresForPlayer(1)).toEqual([]);
   });
 
@@ -108,7 +108,7 @@ describe("recording points during the game for multiple players", () => {
     await enterScore(1, "4");
 
     expect(getScoresForPlayer(0)).toEqual([]);
-    expect(getScoresForPlayer(1)).toEqual([8, 4]);
+    expect(getScoresForPlayer(1)).toEqual([4, 8]);
   });
 
   test("recording scores for two players", async () => {
@@ -118,7 +118,7 @@ describe("recording points during the game for multiple players", () => {
     await enterScore(1, "3");
     await enterScore(0, "2");
 
-    expect(getScoresForPlayer(0)).toEqual([8, 2]);
+    expect(getScoresForPlayer(0)).toEqual([2, 8]);
     expect(getScoresForPlayer(1)).toEqual([3]);
   });
 
@@ -132,8 +132,8 @@ describe("recording points during the game for multiple players", () => {
     await enterScore(1, "3");
     await enterScore(1, "5");
 
-    expect(getScoresForPlayer(0)).toEqual([8, 2, 7]);
-    expect(getScoresForPlayer(1)).toEqual([3, 5]);
+    expect(getScoresForPlayer(0)).toEqual([7, 2, 8]);
+    expect(getScoresForPlayer(1)).toEqual([5, 3]);
 
     await removeLastScore(0);
     await removeLastScore(1);
