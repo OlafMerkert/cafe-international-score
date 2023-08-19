@@ -74,6 +74,9 @@ const renderApp = () => {
 
 describe("recording points during the game for multiple players", () => {
   afterEach(cleanup);
+  afterEach(() => {
+    localStorage.clear();
+  });
 
   test("recording a single score for the first player by pressing a button", async () => {
     const { enterScore, getScoresForPlayer } = renderApp();

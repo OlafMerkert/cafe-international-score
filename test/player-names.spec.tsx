@@ -20,6 +20,9 @@ const renderApp = () => {
 
 describe("setting the player names", () => {
   afterEach(cleanup);
+  afterEach(() => {
+    localStorage.clear();
+  });
 
   test("setting the name of the first player", async () => {
     const { getPlayerNameInputs, enterPlayerName } = renderApp();

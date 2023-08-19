@@ -42,6 +42,9 @@ const renderApp = () => {
 
 describe("selecting the number of players", () => {
   afterEach(cleanup);
+  afterEach(() => {
+    localStorage.clear();
+  });
 
   test("the default is a two player game", async () => {
     const { getPlayerCountInput, getPlayerColumns } = renderApp();
