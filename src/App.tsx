@@ -29,7 +29,7 @@ const App: Component = () => {
                 class="m-1 border border-blue-800 p-2"
                 data-testid="player-column"
               >
-                <PlayerName />
+                <PlayerName playerIndex={playerIndex} />
 
                 <ScoreColumn
                   showScore={showScore}

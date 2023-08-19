@@ -29,7 +29,7 @@ describe("setting the player names", () => {
     const playerNameInputs = getPlayerNameInputs();
 
     expect(playerNameInputs[0]).toHaveValue("Test Player 1");
-    expect(playerNameInputs[1]).toHaveValue("Player ?");
+    expect(playerNameInputs[1]).toHaveValue("Player 2");
   });
 
   test("setting the name of the second player", async () => {
@@ -39,7 +39,7 @@ describe("setting the player names", () => {
 
     const playerNameInputs = getPlayerNameInputs();
 
-    expect(playerNameInputs[0]).toHaveValue("Player ?");
+    expect(playerNameInputs[0]).toHaveValue("Player 1");
     expect(playerNameInputs[1]).toHaveValue("Test Player 2");
   });
 });

@@ -1,7 +1,14 @@
 import { createSignal, type Component } from "solid-js";
 
-const PlayerName: Component = () => {
-  const [playerName, setPlayerName] = createSignal("Player ?");
+interface PlayerNameProps {
+  playerIndex: number;
+}
+
+const PlayerName: Component<PlayerNameProps> = (props) => {
+  const [playerName, setPlayerName] = createSignal(
+    /* eslint-disable-next-line solid/reactivity */
+    `Player ${props.playerIndex + 1}`,
+  );
 
   return (
     <div class="">
