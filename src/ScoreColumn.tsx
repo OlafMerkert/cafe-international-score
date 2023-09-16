@@ -59,6 +59,12 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
 
   return (
     <div class="space-x-1 mt-2">
+      <Show when={props.showScore()}>
+        <div class="text-xl font-bold my-2 text-orange-700">
+          Total Score: {totalScore()}
+        </div>
+      </Show>
+
       <input
         id={getScoreInputId(props.playerIndex)}
         data-testid="score-input"
@@ -73,10 +79,6 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
       />
 
       <Button onClick={handleAddScore}>add</Button>
-
-      <Show when={props.showScore()}>
-        <div class="text-xl font-bold mt-2">Total Score: {totalScore()}</div>
-      </Show>
 
       <div class="mt-3">
         <Button onClick={() => props.removeLastScore()}>remove last</Button>

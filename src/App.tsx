@@ -28,8 +28,8 @@ const App: Component = () => {
   const [showScore, setShowScore] = createSignal(false);
 
   return (
-    <div class="flex flex-col items-center">
-      <div class="flex-initial">
+    <div class="flex flex-col items-center py-4 bg-gray-200">
+      <div class="flex-initial bg-white rounded-lg p-2">
         <header>
           <h1 class="text-xl font-bold px-8">
             Cafe International Score Keeping
@@ -45,7 +45,7 @@ const App: Component = () => {
             {(player, playerIndex) => {
               return (
                 <div
-                  class="m-1 border border-blue-800 p-2"
+                  class="m-1 border border-yellow-700 p-2 bg-yellow-50 rounded drop-shadow-md"
                   data-testid="player-column"
                 >
                   <PlayerName
