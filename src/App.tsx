@@ -45,7 +45,7 @@ const App: Component = () => {
             {(player, playerIndex) => {
               return (
                 <div
-                  class="m-1 border border-yellow-700 p-2 bg-yellow-50 rounded drop-shadow-md"
+                  class="m-1 border border-yellow-700 p-2 bg-yellow-50 rounded drop-shadow-md w-38"
                   data-testid="player-column"
                 >
                   <PlayerName

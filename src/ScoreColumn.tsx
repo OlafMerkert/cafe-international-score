@@ -61,28 +61,30 @@ const ScoreColumn: Component<ShowScoreProps> = (props) => {
     <div class="space-x-1 mt-2">
       <Show when={props.showScore()}>
         <div class="text-xl font-bold my-2 text-orange-700">
-          Total Score: {totalScore()}
+          Score: {totalScore()}
         </div>
       </Show>
 
-      <input
-        id={getScoreInputId(props.playerIndex)}
-        data-testid="score-input"
-        name="score"
-        class="border border-black p-1 text-right w-20"
-        classList={{ "bg-red-200": !isInputValid() }}
-        type="text"
-        value={nextScore()}
-        onChange={handleScoreInput}
-        onKeyUp={handleScoreInputEnter}
-        onKeyDown={handleScoreInputTab}
-      />
+      <Show when={!props.showScore()}>
+        <input
+          id={getScoreInputId(props.playerIndex)}
+          data-testid="score-input"
+          name="score"
+          class="border border-black p-1 text-right w-20"
+          classList={{ "bg-red-200": !isInputValid() }}
+          type="text"
+          value={nextScore()}
+          onChange={handleScoreInput}
+          onKeyUp={handleScoreInputEnter}
+          onKeyDown={handleScoreInputTab}
+        />
 
-      <Button onClick={handleAddScore}>add</Button>
+        <Button onClick={handleAddScore}>add</Button>
 
-      <div class="mt-3">
-        <Button onClick={() => props.removeLastScore()}>remove last</Button>
-      </div>
+        <div class="mt-3">
+          <Button onClick={() => props.removeLastScore()}>remove last</Button>
+        </div>
+      </Show>
 
       <For each={props.allScores()}>
         {(score) => <div data-testid="score-item">{score}</div>}
